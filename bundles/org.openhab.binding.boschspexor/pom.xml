@@ -55,7 +55,6 @@
       <version>2.4.7</version>
       <scope>compile</scope>
     </dependency>
-
     <dependency>
       <groupId>net.minidev</groupId>
       <artifactId>accessors-smart</artifactId>
@@ -68,9 +67,6 @@
       <version>7.3.1</version>
       <scope>provided</scope>
     </dependency>
-
-
-
   </dependencies>
 
 </project>

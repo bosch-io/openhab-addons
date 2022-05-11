@@ -72,7 +72,7 @@ public class SpexorUserGrantService {
     }
 
     public void initialize(SpexorAuthorizationService authService) {
-        logger.info("authService is assigned and can be used");
+        logger.debug("authService is assigned and can be used");
         this.authService = authService;
     }
 

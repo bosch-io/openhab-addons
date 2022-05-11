@@ -4,7 +4,6 @@
 	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
 	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
 
-	<!-- Bosch spexor Bridge -->
 	<bridge-type id="BoschSpexorAPIBrigde">
 		<label>Bosch spexor API Controller</label>
 		<description>The Bosch spexor API Bridge representing the Bosch spexor API.
@@ -18,8 +17,8 @@
 		<supported-bridge-type-refs>
 			<bridge-type-ref id="BoschSpexorAPIBrigde"/>
 		</supported-bridge-type-refs>
-		<label>BoschSpexor Binding Thing</label>
-		<description>Sample thing for BoschSpexor Binding</description>
+		<label>Bosch spexor Binding Thing</label>
+		<description>Sample thing for Bosch spexor Binding</description>
 
 		<channel-groups>
 			<channel-group typeId="status" id="status"/>
@@ -35,10 +34,10 @@
 			</parameter>
 			<parameter name="deviceName" type="text" readOnly="true" required="true">
 				<label>spexor Name</label>
-				<description>Indentifier of the spexor given by the user</description>
+				<description>Name of the spexor given by the user</description>
 			</parameter>
 			<parameter name="refreshInterval" type="integer" min="10" max="900" required="true">
-				<label>spexor refresh interval</label>
+				<label>spexor Refresh Interval</label>
 				<description>Interval to check the new state of the spexor in seconds</description>
 				<default>30</default>
 			</parameter>
@@ -62,7 +61,7 @@
 	</channel-group-type>
 
 	<channel-group-type id="profile">
-		<label>spexor profile</label>
+		<label>spexor Profile</label>
 		<description>Status information about the spexor profile</description>
 		<channels>
 			<channel id="profileName" typeId="profileName"/>
@@ -71,7 +70,7 @@
 	</channel-group-type>
 
 	<channel-group-type id="sensors">
-		<label>spexor sensors</label>
+		<label>spexor Sensors</label>
 		<description>Status information about the spexor sensors</description>
 	</channel-group-type>
 
@@ -89,14 +88,14 @@
 
 	<channel-type id="profileType">
 		<item-type>String</item-type>
-		<label>Profile type</label>
+		<label>Profile Type</label>
 		<description>Description of the profile type</description>
 		<state readOnly="true"/>
 	</channel-type>
 
 	<channel-type id="soc">
 		<item-type>Number</item-type>
-		<label>State of charge</label>
+		<label>State of Charge</label>
 		<description>Battery state in %</description>
 		<state min="0" max="1" step="0.01" pattern="%.2f %unit%" readOnly="false"/>
 	</channel-type>

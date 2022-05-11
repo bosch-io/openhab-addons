@@ -61,7 +61,7 @@ public class BoschSpexorDiscoveryService extends AbstractDiscoveryService
     }
 
     public void init() {
-        // logger.debug("bridgeHandler is " + (bridgeHandler.isEmpty() ? "'null'" : "available"));
+        logger.debug("bridgeHandler is {}", (bridgeHandler.isEmpty() ? "'null'" : "available"));
     }
 
     @Override

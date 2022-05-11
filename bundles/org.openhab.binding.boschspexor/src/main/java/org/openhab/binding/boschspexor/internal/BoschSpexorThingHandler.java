@@ -100,24 +100,19 @@ public class BoschSpexorThingHandler extends BaseThingHandler {
                 updateStatus();
             }
         } else if (channelUID.getId().contains(GROUP_ID_OBSERVATIONS + "#")) {
-            logger.debug("received {} command {}", channelUID, command);
             if (command instanceof StringType) {
-                try {
-                    SensorMode mode = SensorMode.valueOf(command.toString());
-                    String type = channelUID.getId().substring(channelUID.getId().lastIndexOf('#') + 1);
-                    if (SensorMode.Activated.equals(mode) || SensorMode.Deactivated.equals(mode)) {
-                        ObservationChangeStatus newObservationState = apiService
-                                .setObservation(getThing().getUID().getId(), type, SensorMode.Activated.equals(mode));
-                        logger.info("setting new observation state for {} to {} was {}", type, mode,
-                                newObservationState.getStatusCode());
-                        updateState(channelUID, new StringType(newObservationState.getSensorMode().name()));
-                    } else {
-                        logger.info(
-                                "setting observation state for {} to {} not allowed. Only 'Activated' and 'Deactivated' are valid options ",
-                                channelUID, mode);
-                    }
-                } catch (Exception e) {
-                    logger.error("no supported command for observation");
+                SensorMode mode = SensorMode.valueOf(command.toString());
+                String type = channelUID.getId().substring(channelUID.getId().lastIndexOf('#') + 1);
+                if (SensorMode.Activated.equals(mode) || SensorMode.Deactivated.equals(mode)) {
+                    ObservationChangeStatus newObservationState = apiService.setObservation(getThing().getUID().getId(),
+                            type, SensorMode.Activated.equals(mode));
+                    logger.debug("setting new observation state for {} to {} was {}", type, mode,
+                            newObservationState.getStatusCode());
+                    updateState(channelUID, new StringType(newObservationState.getSensorMode().name()));
+                } else {
+                    logger.warn(
+                            "setting observation state for {} to {} not allowed. Only 'Activated' and 'Deactivated' are valid options ",
+                            channelUID, mode);
                 }
             }
         }
@@ -131,13 +126,13 @@ public class BoschSpexorThingHandler extends BaseThingHandler {
 
     @SuppressWarnings("unchecked")
     private void updateStatus() {
-        logger.info("updating {} with new values from backend", getThing().getUID());
+        logger.debug("updating {} with new values from backend", getThing().getUID());
         SpexorInfo spexor = apiService.getSpexor(getThing().getUID().getId());
         if (spexor == null) {
             updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.UNKNOWN.NONE);
         } else {
             Connection connection = spexor.getStatus().getConnection();
-            boolean thingReachable = true;// connection.isOnline();
+            boolean thingReachable = connection.isOnline();
             if (thingReachable) {
                 // CONNECTION STATUS
                 updateStatus(ThingStatus.ONLINE, ThingStatusDetail.ONLINE.NONE);
